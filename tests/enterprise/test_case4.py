@@ -30,14 +30,14 @@ def test_vnode_allocation_to_node_with_large_free_storage():
         resp = CnosDBHelper.query_from_cnosdb(
             f"http://{pods_to_write[0]['ip']}:8902",
             "",
-            "drop database IF EXISTS db4 with replica 1")
+            "drop database IF EXISTS db4")
         assert resp.status_code == 200
 
     with allure.step("创建数据库：db4"):
         resp = CnosDBHelper.query_from_cnosdb(
             f"http://{pods_to_write[0]['ip']}:8902",
             "",
-            "create database if not EXISTS  db4")
+            "create database if not EXISTS  db4 with replica 1")
         assert resp.status_code == 200
 
     with allure.step("等待 3 秒 ..."):

@@ -1,0 +1,1 @@
+export KUBERNETES_NAMESPACE=cnosdb-enterprise-latest-3meta-2querytskv

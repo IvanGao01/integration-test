@@ -3,9 +3,9 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "examples.allure-pytest"
-version = "0.0.0"
-description = "Getting started with Allure Pytest!"
+name = "integration-test"
+version = "0.1.0"
+description = "CnosDB Integration with Allure Pytest!"
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [

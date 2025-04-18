@@ -21,14 +21,12 @@ pods = List[Dict]
 
 def test_vnode_allocation_to_node_with_large_free_storage():
     query_tskv_pods = kubernetes_helper.list_pods(label_selector="cnosdb.com/role=query_tskv")
-    log.info(f"query_tskv_pods: {query_tskv_pods}")
     # 选择 n-1 个 Pod 写入文件（保留一个不写入）
     pods_to_write = query_tskv_pods[:-1]
     excluded_pod = query_tskv_pods[-1]
 
-    log.info(f"当前namespace={kubernetes_helper.default_namespace}")
+    log.info(f"当前 namespace={kubernetes_helper.default_namespace}")
     with allure.step("清理环境：如果数据库db4存在，则删除"):
-
         resp = CnosDBHelper.query_from_cnosdb(
             f"http://{pods_to_write[0]['ip']}:8902",
             "",

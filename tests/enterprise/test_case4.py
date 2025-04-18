@@ -25,6 +25,7 @@ def test_vnode_allocation_to_node_with_large_free_storage():
     pods_to_write = query_tskv_pods[:-1]
     excluded_pod = query_tskv_pods[-1]
 
+
     log.info(f"当前 namespace={kubernetes_helper.default_namespace}")
     with allure.step("清理环境：如果数据库db4存在，则删除"):
         resp = CnosDBHelper.query_from_cnosdb(
@@ -57,10 +58,9 @@ def test_vnode_allocation_to_node_with_large_free_storage():
         assert resp.status_code == 200
 
     with allure.step("查看数据是否落入磁盘空间空余更大的节点"):
-
         sleep(10)
         log.info("休眠 10 秒等待数据完全写入")
-        success, message = check_dir_in_pod(kubernetes_helper, excluded_pod[0]['name'],  "/var/lib/cnosdb/data/data/cnosdb.db4/")
+        success, message = check_dir_in_pod(kubernetes_helper, excluded_pod['name'],  "/var/lib/cnosdb/data/data/cnosdb.db4/")
 
         assert success is True, log.error(message)
 

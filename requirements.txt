@@ -8,7 +8,6 @@ charset-normalizer==3.4.1
 click==8.1.8
 cnos-connector==0.1.9
 durationpy==0.9
--e git+ssh://git@ivangao01.github.com/IvanGao01/integration-test.git@4daa010478dc3e676ba7e2a85f1329b0e98afb81#egg=examples.allure_pytest
 exceptiongroup==1.2.0
 flake8==7.0.0
 flake8-builtins==2.2.0

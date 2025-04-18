@@ -20,7 +20,8 @@ kubernetes_helper = KubernetesHelper()
 pods = List[Dict]
 
 def test_vnode_allocation_to_node_with_large_free_storage():
-    query_tskv_pods = kubernetes_helper.list_pods(label_selector="role=query_tskv")
+    query_tskv_pods = kubernetes_helper.list_pods(label_selector="cnosdb.com/role=query_tskv")
+    log.info(f"query_tskv_pods: {query_tskv_pods}")
     # 选择 n-1 个 Pod 写入文件（保留一个不写入）
     pods_to_write = query_tskv_pods[:-1]
     excluded_pod = query_tskv_pods[-1]

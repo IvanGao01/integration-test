@@ -58,13 +58,13 @@ class KubernetesHelper:
     def list_pods(self, label_selector: str = None) -> List[Dict]:
         """列出命名空间中的 Pod"""
         pods = self.core_v1.list_namespaced_pod(self.default_namespace, label_selector=label_selector)
-        return [self._format_pod_info(pod) for pod in pods.items]
+        return [self._format_pod_info(self, pod) for pod in pods.items]
 
     def get_pod(self, name: str) -> Optional[Dict]:
         """获取 Pod 详细信息"""
         try:
             pod = self.core_v1.read_namespaced_pod(name, self.default_namespace)
-            return self._format_pod_info(pod)
+            return self._format_pod_info(self, pod)
         except client.ApiException as e:
             print(f"获取 Pod 信息失败: {e}")
             return None
@@ -116,7 +116,7 @@ class KubernetesHelper:
     def list_deployments(self) -> List[Dict]:
         """列出命名空间中的 Deployment"""
         deployments = self.apps_v1.list_namespaced_deployment(self.default_namespace)
-        return [self._format_deployment_info(deploy) for deploy in deployments.items]
+        return [self._format_deployment_info(self, deploy) for deploy in deployments.items]
 
     def create_deployment(self, deployment_manifest: Union[Dict, str]) -> bool:
         """创建 Deployment"""
@@ -167,7 +167,7 @@ class KubernetesHelper:
     def list_services(self) -> List[Dict]:
         """列出命名空间中的 Service"""
         services = self.core_v1.list_namespaced_service(self.default_namespace)
-        return [self._format_service_info(svc) for svc in services.items]
+        return [self._format_service_info(self, svc) for svc in services.items]
 
     def create_service(self, service_manifest: Union[Dict, str]) -> bool:
         """创建 Service"""
